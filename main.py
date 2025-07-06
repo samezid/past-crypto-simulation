@@ -1,8 +1,6 @@
 from colorama import Fore, Style
 import pyfiglet
-
-banner = pyfiglet.figlet_format("WELCOME TO")
-
+from datetime import datetime
 
 harga_coin = {
     "BTC": {
@@ -18,6 +16,8 @@ harga_coin = {
 }
 
 # welcome Massage
+banner = pyfiglet.figlet_format("WELCOME TO")
+
 print(" ")
 print(" ")
 print(Fore.MAGENTA + "="*60 + Style.RESET_ALL)
@@ -25,7 +25,7 @@ print(Fore.MAGENTA + "="*60 + Style.RESET_ALL)
 print(" ")
 print(Fore.YELLOW + banner.rstrip() + Style.RESET_ALL)
 print(" ")
-print(Fore.YELLOW + "-------------Past Cryto Profit/Loss Simulation-------------"  + Style.RESET_ALL)
+print(Fore.YELLOW + "-------------Past Crypto Profit/Loss Simulation-------------"  + Style.RESET_ALL)
 print(" ")
 print(Fore.MAGENTA + "="*60 + Style.RESET_ALL)
 print(Fore.MAGENTA + "created by Fachrizal Ainurrahman|Github : github.com/samezid" + Style.RESET_ALL)
@@ -36,9 +36,17 @@ print(" ")
 # input user
 print("-"*60)
 jenis_coin = input("Masukkan Jenis Coin (Contoh : BTC/ETH) : ".upper())
-modal = input("Masukkan Jumlah Modal Beli Coin : Rp.".replace(".", "")) 
+modal = float(input("Masukkan Jumlah Modal Beli Coin : Rp."))
 tanggal_beli = input("Masukkan Simulasi Tanggal Beli Coin (Format YYYY-MM-DD) : ")
-tanggal_beli = input("Masukkan Simulasi Tanggal Jual Coin (Format YYYY-MM-DD) : ")
+tanggal_jual = input("Masukkan Simulasi Tanggal Jual Coin (Format YYYY-MM-DD) : ")
 print("-"*60)
 
-print(jenis_coin)
+# validasi input
+
+
+# operasi
+harga_beli = harga_coin[jenis_coin][tanggal_beli]
+harga_jual = harga_coin[jenis_coin][tanggal_jual]
+
+print(harga_beli)
+print(harga_jual)
