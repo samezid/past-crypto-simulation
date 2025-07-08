@@ -1,6 +1,7 @@
 from colorama import Fore, Style
 import pyfiglet
 from datetime import datetime
+import pandas as pd
 
 harga_coin = {
     "BTC": {
@@ -25,7 +26,7 @@ print(Fore.MAGENTA + "="*60 + Style.RESET_ALL)
 print(" ")
 print(Fore.YELLOW + banner.rstrip() + Style.RESET_ALL)
 print(" ")
-print(Fore.YELLOW + "-------------Past Crypto Profit/Loss Simulation-------------"  + Style.RESET_ALL)
+print(Fore.YELLOW + "-------------Past Crypto Profit/Loss Simulator-------------"  + Style.RESET_ALL)
 print(" ")
 print(Fore.MAGENTA + "="*60 + Style.RESET_ALL)
 print(Fore.MAGENTA + "created by Fachrizal Ainurrahman|Github : github.com/samezid" + Style.RESET_ALL)
@@ -45,8 +46,21 @@ print("-"*60)
 
 
 # operasi
-harga_beli = harga_coin[jenis_coin][tanggal_beli]
-harga_jual = harga_coin[jenis_coin][tanggal_jual]
+harga_beli = harga_coin[jenis_coin][tanggal_beli] #mendapat harga saat beli disimpan di = harga_beli
+jumlah_coin = modal/ harga_beli #mendapat jumlah coin dari sejumlah modal
 
-print(harga_beli)
-print(harga_jual)
+harga_jual = harga_coin[jenis_coin][tanggal_jual] #mendapat harga saat mau jual disimpat di = harga_jual
+gain = jumlah_coin * harga_jual
+
+laba = gain - modal
+
+
+
+
+# output
+print(f"Harga {jenis_coin} saat beli : {harga_beli}")
+print(f"Jumlah {jenis_coin} yang didapat sebanyak : {jumlah_coin}")
+print(f"harga {jenis_coin} saat jual : {harga_jual}")
+print(f"pendapatan yang diperoleh : {gain}")
+print(f"keuntungan bersih : {laba}")
+
