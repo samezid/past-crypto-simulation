@@ -36,10 +36,39 @@ print(" ")
 
 # input user
 print("-"*60)
-jenis_coin = input("Masukkan Jenis Coin (Contoh : BTC/ETH) : ".upper())
-modal = float(input("Masukkan Jumlah Modal Beli Coin : Rp."))
-tanggal_beli = input("Masukkan Simulasi Tanggal Beli Coin (Format YYYY-MM-DD) : ")
-tanggal_jual = input("Masukkan Simulasi Tanggal Jual Coin (Format YYYY-MM-DD) : ")
+
+while True:
+    try:
+        jenis_coin = input("Masukkan Jenis Coin (Contoh : BTC/ETH) : ".upper())
+        if jenis_coin not in ["BTC", "ETH"]:
+            raise ValueError("jenis coin tidak tersedia")
+        break
+    except ValueError:
+        print("jenis coin tidak tersedia")
+
+while True:
+    try:
+        modal = float(input("Masukkan Jumlah Modal Beli Coin : Rp."))
+        break
+    except ValueError:
+        print("input harus diisi dengan angka dan tidak boleh 0, silakan coba lagi.")
+
+while True:
+    try:
+        tanggal_beli = input("Masukkan Simulasi Tanggal Beli Coin (Format YYYY-MM-DD) : ")
+        break
+    except ValueError:
+        print("tanggal tidak tersedia")
+
+while True:
+    try:
+        tanggal_jual = input("Masukkan Simulasi Tanggal Jual Coin (Format YYYY-MM-DD) : ")
+        break
+    except ValueError:
+        print("tanggal tidak tersedia")
+
+
+# -------------------------
 print("-"*60)
 
 # validasi input
@@ -63,4 +92,4 @@ print(f"Jumlah {jenis_coin} yang didapat sebanyak : {jumlah_coin}")
 print(f"harga {jenis_coin} saat jual : {harga_jual}")
 print(f"pendapatan yang diperoleh : {gain}")
 print(f"keuntungan bersih : {laba}")
-
+print("-"*60)
