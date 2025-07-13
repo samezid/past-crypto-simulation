@@ -39,7 +39,7 @@ print("-"*60)
 
 while True:
     try:
-        jenis_coin = input("Masukkan Jenis Coin (Contoh : BTC/ETH) : ".upper())
+        jenis_coin = input("Masukkan Jenis Coin : ")
         if jenis_coin not in ["BTC", "ETH"]:
             raise ValueError("jenis coin tidak tersedia")
         break
