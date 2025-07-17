@@ -1,3 +1,0 @@
-import requests
-
-coin = "11aec9beacb072ec7c03416cb39702eadc201d872e8f24c16458943023023acf"

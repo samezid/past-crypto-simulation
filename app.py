@@ -1,36 +1,23 @@
 from colorama import Fore, Style
 import pyfiglet
-from datetime import datetime
-import pandas as pd
-
-harga_coin = {
-    "BTC": {
-        "2021-01-01": 400_000_000,
-        "2021-12-01": 800_000_000,
-        "2023-01-01": 350_000_000
-    },
-    "ETH": {
-        "2021-01-01": 12_000_000,
-        "2021-12-01": 60_000_000,
-        "2023-01-01": 22_000_000
-    }
-}
+import coin_rate
+from exchange_rate import usdidr
 
 # welcome Massage
 banner = pyfiglet.figlet_format("WELCOME TO")
 
 print(" ")
 print(" ")
-print(Fore.MAGENTA + "="*60 + Style.RESET_ALL)
-print(Fore.MAGENTA + "="*60 + Style.RESET_ALL)
+print(Fore.GREEN + "="*60 + Style.RESET_ALL)
+print(Fore.GREEN + "="*60 + Style.RESET_ALL)
 print(" ")
 print(Fore.YELLOW + banner.rstrip() + Style.RESET_ALL)
 print(" ")
 print(Fore.YELLOW + "-------------Past Crypto Profit/Loss Simulator-------------"  + Style.RESET_ALL)
 print(" ")
-print(Fore.MAGENTA + "="*60 + Style.RESET_ALL)
-print(Fore.MAGENTA + "created by Fachrizal Ainurrahman|Github : github.com/samezid" + Style.RESET_ALL)
-print(Fore.MAGENTA + "="*60 + Style.RESET_ALL)
+print(Fore.GREEN + "="*60 + Style.RESET_ALL)
+print(Fore.GREEN + "created by Fachrizal Ainurrahman|Github : github.com/samezid" + Style.RESET_ALL)
+print(Fore.GREEN + "="*60 + Style.RESET_ALL)
 print(" ")
 print(" ")
 
@@ -40,8 +27,6 @@ print("-"*60)
 while True:
     try:
         jenis_coin = input("Masukkan Jenis Coin : ")
-        if jenis_coin not in ["BTC", "ETH"]:
-            raise ValueError("jenis coin tidak tersedia")
         break
     except ValueError:
         print("jenis coin tidak tersedia")
@@ -75,21 +60,22 @@ print("-"*60)
 
 
 # operasi
-harga_beli = harga_coin[jenis_coin][tanggal_beli] #mendapat harga saat beli disimpan di = harga_beli
+def format_indo(angka):
+    hasil = angka * usdidr
+    return "{:,.2f}".format(hasil).replace(",", "X").replace(".", ",").replace("X", ".")
+
+harga_beli = coin_rate.get_coin_rate(jenis_coin, tanggal_beli) #mendapat harga saat beli disimpan di = harga_beli
 jumlah_coin = modal/ harga_beli #mendapat jumlah coin dari sejumlah modal
-
-harga_jual = harga_coin[jenis_coin][tanggal_jual] #mendapat harga saat mau jual disimpat di = harga_jual
+harga_jual = coin_rate.get_coin_rate(jenis_coin, tanggal_jual) #mendapat harga saat mau jual disimpat di = harga_jual
 gain = jumlah_coin * harga_jual
-
 laba = gain - modal
 
 
 
-
 # output
-print(f"Harga {jenis_coin} saat beli : {harga_beli}")
-print(f"Jumlah {jenis_coin} yang didapat sebanyak : {jumlah_coin}")
-print(f"harga {jenis_coin} saat jual : {harga_jual}")
-print(f"pendapatan yang diperoleh : {gain}")
-print(f"keuntungan bersih : {laba}")
+print(f"Harga {jenis_coin} saat beli : Rp.{format_indo(harga_beli)}")
+print(f"Jumlah {jenis_coin} yang didapat sebanyak : Rp.{format_indo(jumlah_coin)}")
+print(f"harga {jenis_coin} saat jual : Rp.{format_indo(harga_jual)}")
+print(f"pendapatan yang diperoleh : Rp.{format_indo(gain)}")
+print(f"keuntungan bersih : Rp.{format_indo(laba)}")
 print("-"*60)

@@ -1,17 +1,24 @@
 import requests
+import xml.etree.ElementTree as ET
 
-def exchange_rate():
-    exchange = "af1f09ab2857826bd7cc046804a785ad"
-    url = "https://api.exchangerate.host/live"
-    params = {
-              "access_key": exchange,
-              "source": "USD",
-              "currencies": "IDR"
-            }
-    response = requests.get(url, params=params)
-    data = response.json()
+url = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml"
 
-    return(float(data["quotes"]["USDIDR"]))
+response = requests.get(url)
+xml_data =  response.content
 
-print(exchange_rate())
+root = ET.fromstring(xml_data)
 
+ns = {'gesmes': 'http://www.gesmes.org/xml/2002-08-01',
+      'ecb': 'http://www.ecb.int/vocabulary/2002-08-01/eurofxref'}
+
+rates = {}
+for cube in root.findall('.//ecb:Cube[@currency]', ns):
+    currency = cube.attrib['currency']
+    rate = float(cube.attrib['rate'])
+    rates[currency] = rate
+
+print(" ")
+usd = 1 / rates["USD"]
+idr = rates["IDR"]
+
+usdidr = usd * idr
