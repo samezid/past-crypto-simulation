@@ -3,6 +3,7 @@ import pyfiglet
 import coin_rate
 from exchange_rate import usdidr
 
+
 # welcome Massage
 banner = pyfiglet.figlet_format("WELCOME TO")
 
@@ -61,21 +62,23 @@ print("-"*60)
 
 # operasi
 def format_indo(angka):
-    hasil = angka * usdidr
-    return "{:,.2f}".format(hasil).replace(",", "X").replace(".", ",").replace("X", ".")
+    # hasil = angka * usdidr
+    return "{:,.0f}".format(angka).replace(",", "X").replace(".", ",").replace("X", ".")
 
-harga_beli = coin_rate.get_coin_rate(jenis_coin, tanggal_beli) #mendapat harga saat beli disimpan di = harga_beli
-jumlah_coin = modal/ harga_beli #mendapat jumlah coin dari sejumlah modal
-harga_jual = coin_rate.get_coin_rate(jenis_coin, tanggal_jual) #mendapat harga saat mau jual disimpat di = harga_jual
-gain = jumlah_coin * harga_jual
+harga_beli = coin_rate.get_coin_rate(jenis_coin, tanggal_beli) #sudah benar
+jumlah_coin = modal/ harga_beli #sudah benar
+harga_jual = coin_rate.get_coin_rate(jenis_coin, tanggal_jual) #sudah benar
+gain = jumlah_coin * harga_jual #sudah benar
 laba = gain - modal
 
 
 
 # output
 print(f"Harga {jenis_coin} saat beli : Rp.{format_indo(harga_beli)}")
-print(f"Jumlah {jenis_coin} yang didapat sebanyak : Rp.{format_indo(jumlah_coin)}")
 print(f"harga {jenis_coin} saat jual : Rp.{format_indo(harga_jual)}")
+print(" ")
+print(f"Jumlah {jenis_coin} yang didapat sebanyak : {jumlah_coin:,.6f} BTC")
+print(" ")
 print(f"pendapatan yang diperoleh : Rp.{format_indo(gain)}")
 print(f"keuntungan bersih : Rp.{format_indo(laba)}")
 print("-"*60)

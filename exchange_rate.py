@@ -1,6 +1,7 @@
 import requests
 import xml.etree.ElementTree as ET
 
+
 url = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml"
 
 response = requests.get(url)

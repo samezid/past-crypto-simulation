@@ -1,5 +1,6 @@
 import requests
 from datetime import datetime, timedelta
+from exchange_rate import usdidr
 
 COINCAP_TOKEN = "11aec9beacb072ec7c03416cb39702eadc201d872e8f24c16458943023023acf"
 
@@ -24,8 +25,12 @@ def get_coin_rate(coin_id,  date_str):
         data = response.json()
 
         coin_price = float(data["data"][0]["priceUsd"])
+        exchange_to_idr = coin_price * usdidr
 
-        return coin_price
+        return exchange_to_idr
 
     except Exception as e:
           print("Terjadi kesalahan:", e)
+
+
+print(get_coin_rate("bitcoin", "2024-01-01"))
